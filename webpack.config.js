@@ -1,3 +1,4 @@
+const CompressionPlugin = require("compression-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -14,7 +15,7 @@ module.exports = {
   devtool: false,
   entry: "./src/index.ts",
   output: {
-    path: path.resolve(__dirname, "dist-webpack"),
+    path: path.resolve(__dirname, "dist"),
   },
   resolve: {
     modules: [SRC_DIR, "node_modules"],
@@ -25,6 +26,9 @@ module.exports = {
       analyzerMode: "static",
       openAnalyzer: true,
       generateStatsFile: false,
+    }),
+    new CompressionPlugin({
+      algorithm: "gzip",
     }),
   ],
   optimization: {
